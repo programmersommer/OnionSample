@@ -1,0 +1,18 @@
+﻿@model OnionSample.UI.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <p>Hi! That's not a working example, but just a simple demo of onion architecture</p>
+    <form asp-action="AddToDo" asp-controller="Home">
+        <label asp-for="Time"></label>
+        <input type="datetime-local" asp-for="Time" />
+
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" />
+
+        <input type="submit" value="Submit" />
+    </form>
+</div>
