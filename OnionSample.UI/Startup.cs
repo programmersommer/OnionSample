@@ -22,13 +22,17 @@ namespace OnionSample.UI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Application services and use cases
             // We can use Application services directly but better use container for this
             services.AddScoped<IAddToDoItemUseCase, AddToDoItemUseCase>();
+            services.AddScoped<ICalendarService, CalendarService>();
 
+            // Infrastructure services
             // Reference to Infrastructure is needed only to add service into DI container
             // Infrastructure and UI are still independent in Control Flow 
             // If you check diagram that describes Onion architecture, then there would be no reference to Infrastructure from UI
-            services.AddScoped<ICalendarService, CalendarService>();
+            // Do not use this service from UI directly!
+			// It is possible to use Mediator pattern (MediatR package) for DI between Infrastructure and Application
             services.AddScoped<IToDoItemPersistenceService, ToDoItemPersistenceService>();
 
             services.AddControllersWithViews();
