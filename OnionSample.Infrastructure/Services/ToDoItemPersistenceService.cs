@@ -1,10 +1,9 @@
-﻿using OnionSample.Core.Entities;
-using OnionSample.Application.Interfaces;
-
+﻿using OnionSample.Application.Interfaces;
+using OnionSample.Core.Entities;
 
 namespace OnionSample.Infrastructure.Persistence.Services
 {
-    public class ToDoItemPersistenceService : IToDoItemPersistenceService
+    internal class ToDoItemPersistenceService : IToDoItemPersistenceService
     {
         public void Save(ToDoItem item)
         {
