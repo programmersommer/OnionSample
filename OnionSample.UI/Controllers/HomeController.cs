@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnionSample.Application.Interfaces;
 using OnionSample.UI.Models;
 using OnionSample.UI.ViewModels;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace OnionSample.UI.Controllers
 {
@@ -21,9 +22,9 @@ namespace OnionSample.UI.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult AddToDo(HomeViewModel model)
+        public async Task<IActionResult> AddToDo(HomeViewModel model)
         {
-            _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
+            await _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
             return RedirectToAction("Index");
         }
 

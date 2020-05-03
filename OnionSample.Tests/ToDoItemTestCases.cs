@@ -1,22 +1,29 @@
+using Microsoft.Extensions.DependencyInjection;
+using OnionSample.Application;
+using OnionSample.Application.Interfaces;
+using OnionSample.Infrastructure;
 using System;
+using System.Threading.Tasks;
 using Xunit;
-using OnionSample.Tests.Stubs;
-using OnionSample.Application.Services;
-using OnionSample.Application.UseCases;
-
 
 namespace OnionSample.Tests
 {
     public class ToDoItemTestCases
     {
+        private ServiceProvider serviceProvider { get; set; }
 
         [Fact]
-        public void AddToDoItem()
+        public async Task AddToDoItem()
         {
-            var persistenceStub = new ToDoItemPersistenceService();
-            var calendarService = new CalendarService();
-            var useCase = new AddToDoItemUseCase(calendarService, persistenceStub);
-            var result = useCase.AddToDoItem(DateTime.Now, "test todo");
+            var services = new ServiceCollection();
+
+            services.RegisterApplicationServices();
+            services.RegisterInfrastructureServices();
+
+            serviceProvider = services.BuildServiceProvider();
+
+            var useCase = serviceProvider.GetService<IAddToDoItemUseCase>();
+            var result = await useCase.AddToDoItem(DateTime.Now, "test todo");
 
             Assert.True(result);
         }

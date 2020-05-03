@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OnionSample.Application.Interfaces;
-using OnionSample.Application.Services;
-using OnionSample.Application.UseCases;
-using OnionSample.Infrastructure.Persistence.Services;
+using OnionSample.Application;
+using OnionSample.Infrastructure;
 
 namespace OnionSample.UI
 {
@@ -22,18 +19,8 @@ namespace OnionSample.UI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Application services and use cases
-            // We can use Application services directly but better use container for this
-            services.AddScoped<IAddToDoItemUseCase, AddToDoItemUseCase>();
-            services.AddScoped<ICalendarService, CalendarService>();
-
-            // Infrastructure services
-            // Reference to Infrastructure is needed only to add service into DI container
-            // Infrastructure and UI are still independent in Control Flow 
-            // If you check diagram that describes Onion architecture, then there would be no reference to Infrastructure from UI
-            // Do not use this service from UI directly!
-			// It is possible to use Mediator pattern (MediatR package) for DI between Infrastructure and Application
-            services.AddScoped<IToDoItemPersistenceService, ToDoItemPersistenceService>();
+            services.RegisterApplicationServices();
+            services.RegisterInfrastructureServices();
 
             services.AddControllersWithViews();
         }

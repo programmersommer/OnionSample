@@ -1,10 +1,10 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 
 namespace OnionSample.Application.Interfaces
 {
     public interface IAddToDoItemUseCase
     {
-        bool AddToDoItem(DateTime dateTime, string description);
+        Task<bool> AddToDoItem(DateTime dateTime, string description);
     }
 }

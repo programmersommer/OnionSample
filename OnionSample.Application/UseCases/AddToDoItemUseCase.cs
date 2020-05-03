@@ -1,6 +1,9 @@
-﻿using System;
-using OnionSample.Core.Entities;
+﻿using MediatR;
+using OnionSample.Application.Commands;
 using OnionSample.Application.Interfaces;
+using OnionSample.Core.Entities;
+using System;
+using System.Threading.Tasks;
 
 
 namespace OnionSample.Application.UseCases
@@ -8,24 +11,30 @@ namespace OnionSample.Application.UseCases
     public class AddToDoItemUseCase : IAddToDoItemUseCase
     {
         private readonly ICalendarService _calendarService;
-        private readonly IToDoItemPersistenceService _toDoItemService;
 
-        public AddToDoItemUseCase(ICalendarService calendarService, IToDoItemPersistenceService toDoItemService)
+        private readonly IMediator _mediator;
+
+        public AddToDoItemUseCase(ICalendarService calendarService, IMediator mediator)
         {
             _calendarService = calendarService;
-            _toDoItemService = toDoItemService;
+            _mediator = mediator;
         }
 
-        public bool AddToDoItem(DateTime dateTime, string description)
+        public async Task<bool> AddToDoItem(DateTime dateTime, string description)
         {
             var timeAvailable = _calendarService.DateTimeIsAvailable(dateTime);
             if (!timeAvailable) return false;
 
-            _toDoItemService.Save(new ToDoItem()
+            var request = new ToDoCommand()
             {
-                Time = dateTime,
-                Description = description
-            });
+                Item = new ToDoItem()
+                {
+                    Time = dateTime,
+                    Description = description
+                }
+            };
+
+            var response = await _mediator.Send(request);
 
             return true;
         }
