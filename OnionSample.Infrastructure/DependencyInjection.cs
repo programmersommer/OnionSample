@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using OnionSample.Application.Interfaces;
+using OnionSample.Infrastructure.Interfaces;
 using OnionSample.Infrastructure.Persistence.Services;
 using System.Reflection;
 

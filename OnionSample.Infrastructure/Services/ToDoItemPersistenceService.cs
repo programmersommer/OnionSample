@@ -1,5 +1,5 @@
-﻿using OnionSample.Application.Interfaces;
-using OnionSample.Core.Entities;
+﻿using OnionSample.Core.Entities;
+using OnionSample.Infrastructure.Interfaces;
 
 namespace OnionSample.Infrastructure.Persistence.Services
 {

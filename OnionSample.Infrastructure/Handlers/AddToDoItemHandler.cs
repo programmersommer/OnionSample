@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using OnionSample.Application.Commands;
-using OnionSample.Application.Interfaces;
+using OnionSample.Infrastructure.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
