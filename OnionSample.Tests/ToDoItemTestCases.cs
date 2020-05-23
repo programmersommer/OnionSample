@@ -23,7 +23,7 @@ namespace OnionSample.Tests
             serviceProvider = services.BuildServiceProvider();
 
             var useCase = serviceProvider.GetService<IAddToDoItemUseCase>();
-            var result = await useCase.AddToDoItem(DateTime.Now, "test todo");
+            var result = await useCase.AddToDoItemAsync(DateTime.Now, "test todo");
 
             Assert.True(result);
         }

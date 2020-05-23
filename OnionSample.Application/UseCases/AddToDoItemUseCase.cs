@@ -20,7 +20,7 @@ namespace OnionSample.Application.UseCases
             _mediator = mediator;
         }
 
-        public async Task<bool> AddToDoItem(DateTime dateTime, string description)
+        public async Task<bool> AddToDoItemAsync(DateTime dateTime, string description)
         {
             var timeAvailable = _calendarService.DateTimeIsAvailable(dateTime);
             if (!timeAvailable) return false;
@@ -34,7 +34,7 @@ namespace OnionSample.Application.UseCases
                 }
             };
 
-            var response = await _mediator.Send(request);
+            _ = await _mediator.Send(request).ConfigureAwait(false);
 
             return true;
         }

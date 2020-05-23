@@ -5,6 +5,6 @@ namespace OnionSample.Application.Interfaces
 {
     public interface IAddToDoItemUseCase
     {
-        Task<bool> AddToDoItem(DateTime dateTime, string description);
+        Task<bool> AddToDoItemAsync(DateTime dateTime, string description);
     }
 }

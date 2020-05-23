@@ -22,9 +22,9 @@ namespace OnionSample.UI.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToDo(HomeViewModel model)
+        public async Task<IActionResult> AddToDoAsync(HomeViewModel model)
         {
-            await _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
+            await _addToDoItemUseCase.AddToDoItemAsync(model.Time, model.Description);
             return RedirectToAction("Index");
         }
 
