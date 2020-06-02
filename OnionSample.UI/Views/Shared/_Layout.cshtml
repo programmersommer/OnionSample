@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using System.Text.Encodings.Web;
+@inject JavaScriptEncoder encoder;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,6 +30,21 @@
         </nav>
     </header>
     <div class="container">
+
+        @{
+            var message = "";
+            if (!String.IsNullOrEmpty(TempData["Message"] as string))
+                message = @JavaScriptEncoder.Default.Encode(TempData["Message"].ToString());
+        }
+
+        <div class="alert alert-primary display-none mb-2" role="alert" id="AlertDiv">
+            <strong>For your information</strong> 
+            <span>@message</span>
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -34,12 +52,24 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - OnionSample
+            &copy; 2020 - Onion Sample
         </div>
     </footer>
     <script src="~/jquery/jquery.min.js"></script>
     <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" nonce="Z2VyZ2Vya2xCNGx0aTN1eWxidUlMVUJIR29iNHU1NDtvKihv">
+        $(document).ready(function () {
+            @if (!String.IsNullOrEmpty(message))
+            {
+                @:$("#AlertDiv").fadeTo(2000, 3).slideUp(500, function () { });
+            }
+
+            $('.alert .close').on('click', function(e) {
+                    $(this).parent().hide();
+                });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

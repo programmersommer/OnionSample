@@ -23,7 +23,11 @@ namespace OnionSample.UI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddToDo(HomeViewModel model)
         {
-            _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
+            var itemAdded = _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
+            if (itemAdded)
+                TempData["Message"] = "ToDo item was added";
+            else
+                TempData["Message"] = "ToDo item was not added";
             return RedirectToAction("Index");
         }
 
