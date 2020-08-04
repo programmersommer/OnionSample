@@ -29,7 +29,7 @@ namespace OnionSample.Application.UseCases
             {
                 Item = new ToDoItem()
                 {
-                    Time = dateTime,
+                    EventDateTime = dateTime,
                     Description = description
                 }
             };

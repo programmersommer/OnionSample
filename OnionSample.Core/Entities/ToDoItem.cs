@@ -5,7 +5,8 @@ namespace OnionSample.Core.Entities
 {
     public class ToDoItem
     {
-        public DateTime Time { get; set; }
+        public int Id { get; set; }
+        public DateTime EventDateTime { get; set; }
         public string Description { get; set; }
     }
 }

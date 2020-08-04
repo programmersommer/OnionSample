@@ -20,7 +20,7 @@ namespace OnionSample.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterApplicationServices();
-            services.RegisterInfrastructureServices();
+            services.RegisterInfrastructureServices(Configuration);
 
             services.AddControllersWithViews();
         }
