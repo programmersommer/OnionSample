@@ -23,7 +23,7 @@ namespace OnionSample.Application.UseCases
 
             _toDoItemService.Save(new ToDoItem()
             {
-                Time = dateTime,
+                EventDateTime = dateTime,
                 Description = description
             });
 

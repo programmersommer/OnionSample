@@ -27,7 +27,7 @@ namespace OnionSample.UI
             // If you check diagram that describes Onion architecture, then there would be no reference to Infrastructure from UI
             // Reference to Infrastructure is needed only to add services into DI container
             // Infrastructure and UI are still independent in Control Flow 
-            services.RegisterInfrastructureServices();
+            services.RegisterInfrastructureServices(Configuration);
 
             services.AddControllersWithViews();
         }
