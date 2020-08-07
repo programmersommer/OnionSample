@@ -1,16 +1,16 @@
-﻿using System;
+﻿using OnionSample.Application.Interfaces;
 using OnionSample.Core.Entities;
-using OnionSample.Application.Interfaces;
-
+using System;
+using System.Collections.Generic;
 
 namespace OnionSample.Application.UseCases
 {
-    public class AddToDoItemUseCase : IAddToDoItemUseCase
+    public class ToDoItemUseCases : IToDoItemUseCases
     {
         private readonly ICalendarService _calendarService;
         private readonly IToDoItemPersistenceService _toDoItemService;
 
-        public AddToDoItemUseCase(ICalendarService calendarService, IToDoItemPersistenceService toDoItemService)
+        public ToDoItemUseCases(ICalendarService calendarService, IToDoItemPersistenceService toDoItemService)
         {
             _calendarService = calendarService;
             _toDoItemService = toDoItemService;
@@ -30,5 +30,9 @@ namespace OnionSample.Application.UseCases
             return true;
         }
 
+        public IEnumerable<ToDoItem> GetToDoItems()
+        {
+            return _toDoItemService.GetToDoItems();
+        }
     }
 }

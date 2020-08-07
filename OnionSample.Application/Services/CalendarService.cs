@@ -1,5 +1,5 @@
-﻿using System;
-using OnionSample.Application.Interfaces;
+﻿using OnionSample.Application.Interfaces;
+using System;
 
 
 namespace OnionSample.Application.Services

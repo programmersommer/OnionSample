@@ -9,7 +9,7 @@ namespace OnionSample.Application
     {
         public static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IAddToDoItemUseCase, AddToDoItemUseCase>();
+            services.AddScoped<IToDoItemUseCases, ToDoItemUseCases>();
             services.AddScoped<ICalendarService, CalendarService>();
 
             return services;

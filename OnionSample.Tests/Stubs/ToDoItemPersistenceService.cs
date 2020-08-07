@@ -19,7 +19,7 @@ namespace OnionSample.Tests.Stubs
 
         public void Save(ToDoItem item)
         {
-           // not yet implemented
+            // not yet implemented
         }
     }
 }
