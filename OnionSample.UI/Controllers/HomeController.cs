@@ -3,15 +3,16 @@ using OnionSample.Application.Interfaces;
 using OnionSample.UI.Models;
 using OnionSample.UI.ViewModels;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnionSample.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IAddToDoItemUseCase _addToDoItemUseCase;
+        private readonly IToDoItemUseCases _addToDoItemUseCase;
 
-        public HomeController(IAddToDoItemUseCase addToDoItemUseCase)
+        public HomeController(IToDoItemUseCases addToDoItemUseCase)
         {
             _addToDoItemUseCase = addToDoItemUseCase;
         }
@@ -26,6 +27,22 @@ namespace OnionSample.UI.Controllers
         {
             await _addToDoItemUseCase.AddToDoItemAsync(model.Time, model.Description);
             return RedirectToAction("Index");
+        }
+
+        public async Task<JsonResult> GetEvents(double start, double end)
+        {
+            var items = (await _addToDoItemUseCase.GetToDoItemsAsync()).ToList();
+
+            var events = from item in items
+                         select new
+                         {
+                             id = item.Id,
+                             title = item.Description,
+                             start = item.EventDateTime,
+                             allDay = false
+                         };
+
+            return Json(events.ToArray());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

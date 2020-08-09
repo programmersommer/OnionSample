@@ -27,10 +27,10 @@ namespace OnionSample.Infrastructure.Persistence.Services
             return _context.ToDoItems;
         }
 
-        public ToDoItem GetToDoItem(DateTime eventDateTime)
+        public IEnumerable<ToDoItem> GetToDoItems(DateTime eventDateTime)
         {
-            return _context.ToDoItems.FirstOrDefault(t =>
-                t.EventDateTime.Hour == eventDateTime.Hour && t.EventDateTime.Day == eventDateTime.Day && t.EventDateTime.Year == eventDateTime.Year);
+            return _context.ToDoItems.Where(t =>
+                t.EventDateTime.Month == eventDateTime.Month && t.EventDateTime.Day == eventDateTime.Day && t.EventDateTime.Year == eventDateTime.Year);
         }
     }
 }

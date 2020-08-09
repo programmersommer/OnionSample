@@ -1,5 +1,3 @@
-using System;
-
 namespace OnionSample.UI.Models
 {
     public class ErrorViewModel

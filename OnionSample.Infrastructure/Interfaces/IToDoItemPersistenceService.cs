@@ -8,7 +8,7 @@ namespace OnionSample.Infrastructure.Interfaces
     {
         void Save(ToDoItem item);
         IEnumerable<ToDoItem> GetToDoItems();
-        ToDoItem GetToDoItem(DateTime eventDateTime);
+        IEnumerable<ToDoItem> GetToDoItems(DateTime eventDateTime);
     }
 
 }

@@ -3,6 +3,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+@section Styles {
+    <link href='~/css/main.css' rel='stylesheet' />
+}
 
 <div class="text-center">
     <p>Hi! That's not a working example, but just a simple demo of onion architecture</p>
@@ -16,3 +19,26 @@
         <input type="submit" value="Submit" />
     </form>
 </div>
+
+<div class="text-center">
+    <div id="calendar"></div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                    theme: true,
+                editable: false,
+                events: "@Url.Action("GetEvents", "Home")"
+            });
+            calendar.render();
+        });
+    </script>
+}
