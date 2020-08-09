@@ -29,6 +29,7 @@ namespace OnionSample.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<JsonResult> GetEvents(double start, double end)
         {
             var items = (await _addToDoItemUseCase.GetToDoItemsAsync()).ToList();
