@@ -10,11 +10,11 @@ namespace OnionSample.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToDoItemUseCases _addToDoItemUseCase;
+        private readonly IToDoItemUseCases _toDoItemUseCases;
 
-        public HomeController(IToDoItemUseCases addToDoItemUseCase)
+        public HomeController(IToDoItemUseCases toDoItemUseCases)
         {
-            _addToDoItemUseCase = addToDoItemUseCase;
+            _toDoItemUseCases = toDoItemUseCases;
         }
 
         public IActionResult Index()
@@ -25,14 +25,16 @@ namespace OnionSample.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToDoAsync(HomeViewModel model)
         {
-            await _addToDoItemUseCase.AddToDoItemAsync(model.Time, model.Description);
+            await _toDoItemUseCases.AddToDoItemAsync(model.Time, model.Description);
             return RedirectToAction("Index");
         }
 
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> GetEvents(double start, double end)
         {
-            var items = (await _addToDoItemUseCase.GetToDoItemsAsync()).ToList();
+            // start and and are currently not used, but this is not a real solution - that's just a demo :)
+            
+            var items = (await _toDoItemUseCases.GetToDoItemsAsync()).ToList();
 
             var events = from item in items
                          select new
