@@ -11,9 +11,9 @@ namespace OnionSample.UI.Controllers
     {
         private readonly IToDoItemUseCases _toDoItemUseCases;
 
-        public HomeController(IToDoItemUseCases addToDoItemUseCase)
+        public HomeController(IToDoItemUseCases toDoItemUseCases)
         {
-            _toDoItemUseCases = addToDoItemUseCase;
+            _toDoItemUseCases = toDoItemUseCases;
         }
 
         public IActionResult Index()
@@ -36,6 +36,8 @@ namespace OnionSample.UI.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult GetEvents(double start, double end)
         {
+            // start and and are currently not used, but this is not a real solution - that's just a demo :)
+
             var items = _toDoItemUseCases.GetToDoItems().ToList();
 
             var events = from item in items
