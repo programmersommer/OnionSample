@@ -15,7 +15,6 @@
 }
 
 <div class="text-center">
-    <p>Hi! That's not a working example, but just a simple demo of onion architecture</p>
     <form asp-action="AddToDo" asp-controller="Home">
         <label asp-for="Time"></label>
         <input type="datetime-local" asp-for="Time" />
@@ -37,19 +36,40 @@
     <script src="~/js/main.js"></script>
 
     <script>
-
-        $(document).ready(function () {
-
+         $(document).ready(function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                    theme: true,
                 editable: false,
-                events: "@Url.Action("GetEvents", "Home")"
+                events: function (info, successCallback, failureCallback) {
+                    var data = {
+                        start: info.start.valueOf(),
+                        end: info.end.valueOf()
+                    };
+                    $.ajax({
+                        url: "@Url.Action("GetEvents", "Home")",
+                        headers: {
+                            "RequestVerificationToken": '@GetAntiXsrfRequestToken()'
+                        },
+                        data: data,
+                        success: function (res) {
+                            successCallback(
+                                res.map(function (eventEl) {
+                                    return {
+                                        title: eventEl.title,
+                                        start: eventEl.start
+                                    }
+                                })
+                            );
+                        },
+                        error: function (xhr, status, error) {
+                            var errorMessage = xhr.status + ': ' + xhr.statusText
+                            alert('Error - ' + errorMessage);
+                        }
+                    });
+                }
             });
             calendar.render();
-
         });
-
     </script>
 }

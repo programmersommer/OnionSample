@@ -9,11 +9,11 @@ namespace OnionSample.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToDoItemUseCases _addToDoItemUseCase;
+        private readonly IToDoItemUseCases _toDoItemUseCases;
 
         public HomeController(IToDoItemUseCases addToDoItemUseCase)
         {
-            _addToDoItemUseCase = addToDoItemUseCase;
+            _toDoItemUseCases = addToDoItemUseCase;
         }
 
         public IActionResult Index()
@@ -24,7 +24,7 @@ namespace OnionSample.UI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddToDo(HomeViewModel model)
         {
-            var itemAdded = _addToDoItemUseCase.AddToDoItem(model.Time, model.Description);
+            var itemAdded = _toDoItemUseCases.AddToDoItem(model.Time, model.Description);
             if (itemAdded)
                 TempData["Message"] = "ToDo item was added";
             else
@@ -33,9 +33,10 @@ namespace OnionSample.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [ValidateAntiForgeryToken]
         public JsonResult GetEvents(double start, double end)
         {
-            var items = _addToDoItemUseCase.GetToDoItems().ToList();
+            var items = _toDoItemUseCases.GetToDoItems().ToList();
 
             var events = from item in items
                          select new
