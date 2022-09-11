@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnionSample.Infrastructure.Handlers
 {
-    class AddToDoItemHandler : IRequestHandler<ToDoCommand, ToDoCommandResult>
+    class AddToDoItemHandler : IRequestHandler<AddToDoCommand, ToDoCommandResult>
     {
         private readonly IToDoItemPersistenceService _toDoItemPersistenceService;
         public AddToDoItemHandler(IToDoItemPersistenceService toDoItemPersistenceService)
@@ -14,7 +14,7 @@ namespace OnionSample.Infrastructure.Handlers
             _toDoItemPersistenceService = toDoItemPersistenceService;
         }
 
-        public Task<ToDoCommandResult> Handle(ToDoCommand request, CancellationToken cancellationToken)
+        public Task<ToDoCommandResult> Handle(AddToDoCommand request, CancellationToken cancellationToken)
         {
             _toDoItemPersistenceService.Save(request.Item);
 

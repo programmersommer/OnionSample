@@ -26,7 +26,7 @@ namespace OnionSample.Application.UseCases
             var timeAvailable = _calendarService.DateTimeIsAvailable(dateTime);
             if (!timeAvailable) return false;
 
-            var request = new ToDoCommand()
+            var request = new AddToDoCommand()
             {
                 Item = new ToDoItem()
                 {
