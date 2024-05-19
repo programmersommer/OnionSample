@@ -25,7 +25,13 @@ namespace OnionSample.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToDoAsync(HomeViewModel model)
         {
-            await _toDoItemUseCases.AddToDoItemAsync(model.Time, model.Description);
+            var itemAdded = await _toDoItemUseCases.AddToDoItemAsync(model.Time, model.Description);
+
+            if (itemAdded)
+                TempData["Message"] = "ToDo item was added";
+            else
+                TempData["Message"] = "ToDo item was not added";
+
             return RedirectToAction("Index");
         }
 
