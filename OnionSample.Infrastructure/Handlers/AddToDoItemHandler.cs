@@ -18,7 +18,7 @@ namespace OnionSample.Infrastructure.Handlers
         {
             _toDoItemPersistenceService.Save(request.Item);
 
-            return Task.FromResult(new ToDoCommandResult("ToDo item saved"));
+            return Task.FromResult(new ToDoCommandResult(true, "ToDo item was saved"));
         }
     }
 }

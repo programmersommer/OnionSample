@@ -21,10 +21,10 @@ namespace OnionSample.Application.UseCases
             _mediator = mediator;
         }
 
-        public async Task<bool> AddToDoItemAsync(DateTime dateTime, string description)
+        public async Task<ToDoCommandResult> AddToDoItemAsync(DateTime dateTime, string description)
         {
             var timeAvailable = _calendarService.DateTimeIsAvailable(dateTime);
-            if (!timeAvailable) return false;
+            if (!timeAvailable) return new ToDoCommandResult(false, "This time is not available");
 
             var request = new AddToDoCommand()
             {
@@ -35,9 +35,9 @@ namespace OnionSample.Application.UseCases
                 }
             };
 
-            _ = await _mediator.Send(request).ConfigureAwait(false);
+            var toDoCommandResult = await _mediator.Send(request).ConfigureAwait(false);
 
-            return true;
+            return toDoCommandResult;
         }
 
         public async Task<IEnumerable<ToDoItem>> GetToDoItemsAsync()
