@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnionSample.Application\OnionSample.Application.csproj" />
-    <ProjectReference Include="..\OnionSample.Infrastructure\OnionSample.Infrastructure.csproj" />
+    <ProjectReference Include="..\OnionSample.Infrastructure.DI\OnionSample.Infrastructure.DI.csproj" />
   </ItemGroup>
 
 

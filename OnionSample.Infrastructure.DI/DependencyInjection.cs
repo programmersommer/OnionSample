@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OnionSample.Application.Interfaces;
 using OnionSample.Infrastructure.Persistence.Services;
 
-namespace OnionSample.Infrastructure
+namespace OnionSample.Infrastructure.DI
 {
     public static class DependencyInjection
     {
