@@ -26,9 +26,9 @@ namespace OnionSample.UI.Controllers
         {
             var itemAdded = _toDoItemUseCases.AddToDoItem(model.Time, model.Description);
             if (itemAdded)
-                TempData["Message"] = "ToDo item was added";
+                TempData["Message"] = "ToDo item was inserted!";
             else
-                TempData["Message"] = "ToDo item was not added";
+                TempData["Message"] = "ToDo item was not inserted!";
 
             return RedirectToAction("Index");
         }
